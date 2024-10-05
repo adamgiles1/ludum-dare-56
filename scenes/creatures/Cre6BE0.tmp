@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cipy4a3ofalht"]
+
+[ext_resource type="Script" path="res://scenes/creatures/Creature.gd" id="1_pklhn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdmcs"]
+albedo_color = Color(0.854131, 0, 0.110932, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_77ndr"]
+material = SubResource("StandardMaterial3D_xdmcs")
+inner_radius = 0.25
+outer_radius = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_wybnc"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_no2xv"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1tbvt"]
+
+[node name="CreatureOne" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_pklhn")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_77ndr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("SphereMesh_wybnc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_no2xv")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_1tbvt")
