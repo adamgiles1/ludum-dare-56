@@ -14,6 +14,8 @@ var time_till_next_command := 1.0
 var current_command: Vector3 = Vector3.ZERO
 var is_caught = false
 var caught_time_left
+var suck_towards: Vector3 = Vector3.INF
+var suck_power := 10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,7 +36,12 @@ func _process(delta: float) -> void:
 	if (direction):
 		mesh.look_at(mesh.global_position + direction)
 	
-	if direction:
+	if suck_towards != Vector3.INF:
+		direction = suck_towards - position
+		velocity.x = direction.x * suck_power
+		velocity.z = direction.z * suck_power
+		suck_towards = Vector3.INF
+	elif direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
