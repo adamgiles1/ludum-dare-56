@@ -14,6 +14,9 @@ var anim_player: AnimationPlayer = $AnimationPlayer
 var stun_time = -1
 var time_to_stun = .25
 
+func _ready() -> void:
+	Signals.upgrade_net.connect(net_upgrade_handle)
+
 func _physics_process(delta: float) -> void:
 	stun_time -= delta
 	if position.y < -5:
@@ -52,3 +55,7 @@ func capture() -> void:
 	if things.size() > 0:
 		for thing in things:
 			thing.get_parent().catch()
+
+func net_upgrade_handle() -> void:
+	print("upgrading net")
+	capture_hitbox.scale *= 2
