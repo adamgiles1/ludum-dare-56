@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf7ks7a7k1o1i"]
+[gd_scene load_steps=9 format=3 uid="uid://cf7ks7a7k1o1i"]
 
 [ext_resource type="PackedScene" uid="uid://bnc8yuow6e3v5" path="res://scenes/player/player.tscn" id="1_qses7"]
 [ext_resource type="Script" path="res://scenes/Game.gd" id="1_uq5qs"]
-[ext_resource type="Texture2D" uid="uid://c3lwu7r1hcpxf" path="res://icon.svg" id="3_kjsrp"]
 [ext_resource type="Script" path="res://scenes/Camera.gd" id="3_yodg6"]
+[ext_resource type="AudioStream" uid="uid://clgewmskjbns1" path="res://assets/music/ld56.wav" id="5_2kou7"]
+[ext_resource type="PackedScene" uid="uid://dd7aot2e2igcg" path="res://scenes/scenery/grass.tscn" id="5_gi1mx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cyln4"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,19 +19,6 @@ sky = SubResource("Sky_o4ynm")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4e8q1"]
-albedo_texture = ExtResource("3_kjsrp")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yisbd"]
-albedo_color = Color(0.556863, 0.4, 0, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_8qdda"]
-material = SubResource("StandardMaterial3D_yisbd")
-size = Vector2(125, 60)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6ebd3"]
-size = Vector3(125, 1, 60)
-
 [node name="Game" type="Node3D"]
 script = ExtResource("1_uq5qs")
 
@@ -43,17 +31,6 @@ environment = SubResource("Environment_2nu1w")
 
 [node name="Player" parent="." instance=ExtResource("1_qses7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.6941)
-material_override = SubResource("StandardMaterial3D_4e8q1")
-mesh = SubResource("PlaneMesh_8qdda")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_6ebd3")
 
 [node name="Creatures" type="Node3D" parent="."]
 
@@ -115,3 +92,11 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 12
 theme_override_font_sizes/normal_font_size = 40
 text = "💲0"
+
+[node name="Grass" type="Node3D" parent="."]
+
+[node name="Grass" parent="Grass" instance=ExtResource("5_gi1mx")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2kou7")
+volume_db = -6.559

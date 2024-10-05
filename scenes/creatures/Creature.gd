@@ -15,7 +15,7 @@ var current_command: Vector3 = Vector3.ZERO
 var is_caught = false
 var caught_time_left
 var suck_towards: Vector3 = Vector3.INF
-var suck_power := 10.0
+var suck_power := 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

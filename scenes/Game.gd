@@ -8,6 +8,9 @@ var creature_scn2 := preload("res://scenes/creatures/CreatureTwo.tscn")
 @onready
 var creature_scn3 := preload("res://scenes/creatures/CreatureThree.tscn")
 
+@onready
+var music: AudioStreamPlayer = $Music
+
 var time_till_spawn := 0.0
 
 var time_between_spawn := 5.0
@@ -33,7 +36,7 @@ var money_label: RichTextLabel = $%MoneyLabel
 func _ready() -> void:
 	Globals.game = self
 	init_buttons()
-
+	var music: AudioStreamPlayer = $Music
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -43,6 +46,13 @@ func _process(delta: float) -> void:
 		spawn_creature()
 	update_store()
 	set_money(money)
+	
+	if !music.playing:
+		music.play()
+	
+	if Input.is_action_just_pressed("ui_end"):
+		#todo remove
+		money += 100
 
 func get_creature_scn() -> Creature:
 	if creature_tier >= 3 && randi_range(1,10) == 2:

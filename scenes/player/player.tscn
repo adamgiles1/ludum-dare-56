@@ -2,6 +2,16 @@
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_oqo3d"]
 
+[sub_resource type="Animation" id="Animation_xafbs"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/BodyMesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
 [sub_resource type="Animation" id="Animation_r07je"]
 resource_name = "capture"
 length = 0.5
@@ -12,16 +22,6 @@ tracks/0/path = NodePath("CharacterBody3D/BodyMesh")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.25, 1, 0, 1, 0, 0.5, 1, 0, 0, 0)
-
-[sub_resource type="Animation" id="Animation_xafbs"]
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/BodyMesh")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a7sf8"]
 _data = {
