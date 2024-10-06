@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv6sm8p4yojo6"]
+[gd_scene load_steps=9 format=3 uid="uid://dv6sm8p4yojo6"]
 
 [ext_resource type="Script" path="res://scenes/creatures/Creature.gd" id="1_fdwea"]
 [ext_resource type="AudioStream" uid="uid://ca06hsa80kfeh" path="res://assets/sounds/pop.wav" id="2_6hnb6"]
+[ext_resource type="PackedScene" uid="uid://cswx5flpt5tvo" path="res://assets/models/butterfly-gold.fbx" id="2_bqgw4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvdrs"]
 albedo_color = Color(1, 0.756863, 0.333333, 1)
@@ -23,11 +24,22 @@ height = 1.0
 
 [node name="CreatureOne" type="CharacterBody3D"]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_fdwea")
 speed = 6.0
 value = 100
 
+[node name="butterfly" parent="." instance=ExtResource("2_bqgw4")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1, 0)
+
+[node name="Skeleton3D" parent="butterfly/Armature" index="0"]
+bones/5/rotation = Quaternion(6.88394e-08, -6.88394e-08, 0.707107, 0.707107)
+bones/7/rotation = Quaternion(-1.54543e-08, -1.54543e-08, -0.707107, 0.707107)
+bones/9/rotation = Quaternion(0.0953464, 0.100363, 0.701586, 0.699009)
+bones/12/rotation = Quaternion(0.0998973, -0.0998973, -0.690235, 0.70966)
+
 [node name="Mesh" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("TorusMesh_77ndr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
@@ -48,3 +60,5 @@ shape = SubResource("BoxShape3D_1tbvt")
 stream = ExtResource("2_6hnb6")
 volume_db = 15.0
 pitch_scale = 0.5
+
+[editable path="butterfly"]

@@ -9,6 +9,8 @@ var value := 1
 
 @onready
 var mesh = $Mesh
+@onready
+var real_mesh = $butterfly
 
 var time_till_next_command := 1.0
 var current_command: Vector3 = Vector3.ZERO
@@ -16,6 +18,9 @@ var is_caught = false
 var caught_time_left
 var suck_towards: Vector3 = Vector3.INF
 var suck_power := 20.0
+
+@onready
+var anim_player: AnimationPlayer = $butterfly/AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,12 +34,15 @@ func _process(delta: float) -> void:
 		if caught_time_left < 0:
 			queue_free()
 		return
+	else:
+		anim_player.play("Armature|ArmatureAction", -1, speed)
 	
 	time_till_next_command -= delta
 	var direction = get_dir()
 	
 	if (direction):
 		mesh.look_at(mesh.global_position + direction)
+		real_mesh.look_at(real_mesh.global_position + direction)
 	
 	if suck_towards != Vector3.INF:
 		direction = suck_towards - position
@@ -64,8 +72,8 @@ func catch() -> void:
 	is_caught = true
 	caught_time_left = .5
 	var tween = get_tree().create_tween()
-	tween.tween_property($Mesh, "scale", Vector3.ZERO, .4)
-	Globals.game.creature_caught(value)
+	tween.tween_property(real_mesh, "scale", Vector3.ZERO, .4)
+	Globals.game.creature_caught(value, global_position)
 	if Globals.blops_this_tick < 3:
 		$CaughtSound.play()
 	Globals.blops_this_tick += 1

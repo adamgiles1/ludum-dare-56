@@ -7,6 +7,8 @@ var creature_scn1 := preload("res://scenes/creatures/CreatureOne.tscn")
 var creature_scn2 := preload("res://scenes/creatures/CreatureTwo.tscn")
 @onready
 var creature_scn3 := preload("res://scenes/creatures/CreatureThree.tscn")
+@onready
+var money_sign := preload("res://scenes/MoneySign.tscn")
 
 @onready
 var music: AudioStreamPlayer = $Music
@@ -76,9 +78,13 @@ func spawn_creature() -> void:
 	init.position.z = z
 	$Creatures.add_child(init)
 
-func creature_caught(value: int) -> void:
+func creature_caught(value: int, pos: Vector3) -> void:
 	print("caught creature with value %s and multiplier %s" % [value, money_mult])
 	set_money(money + value * money_mult)
+	var sign = money_sign.instantiate()
+	sign.global_position = pos
+	sign.set_amt(value * money_mult)
+	add_child(sign)
 
 func set_money(num: int) -> void:
 	money = num

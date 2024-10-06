@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://da1sk8hbnf8gk"]
+[gd_scene load_steps=9 format=3 uid="uid://da1sk8hbnf8gk"]
 
 [ext_resource type="Script" path="res://scenes/creatures/Creature.gd" id="1_1n2l0"]
+[ext_resource type="PackedScene" uid="uid://qcp74d4djcy3" path="res://assets/models/butterfly-purp.fbx" id="2_4hhr7"]
 [ext_resource type="AudioStream" uid="uid://ca06hsa80kfeh" path="res://assets/sounds/pop.wav" id="2_pkrjq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8hxg"]
@@ -23,11 +24,16 @@ height = 1.0
 
 [node name="CreatureThree" type="CharacterBody3D"]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_1n2l0")
 speed = 4.0
 value = 10
 
+[node name="butterfly" parent="." instance=ExtResource("2_4hhr7")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1, 0)
+
 [node name="Mesh" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("TorusMesh_77ndr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
@@ -48,3 +54,5 @@ shape = SubResource("BoxShape3D_1tbvt")
 stream = ExtResource("2_pkrjq")
 volume_db = 12.0
 pitch_scale = 1.5
+
+[editable path="butterfly"]
