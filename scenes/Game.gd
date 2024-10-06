@@ -65,8 +65,8 @@ func spawn_creature() -> void:
 	var current_creatures = $Creatures.get_child_count()
 	if current_creatures > 500:
 		return
-	var x = randf_range(-25, 25)
-	var z = randf_range(-30, 10)
+	var x = randf_range(-17, 18)
+	var z = randf_range(-28, 8)
 	print("spawning creature at coords %s %s. There is now %s creatures" % [x, z, current_creatures])
 	var init: Creature = get_creature_scn()
 	init.position.x = x
@@ -80,7 +80,7 @@ func creature_caught(value: int) -> void:
 
 func set_money(num: int) -> void:
 	money = num
-	money_label.text = "💲" + str(num)
+	money_label.text = "💲" + "[outline_size=12]%s[/outline_size]" % num
 
 func init_buttons() -> void:
 	net_button = $%NetButton

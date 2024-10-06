@@ -12,11 +12,14 @@ const JUMP_VELOCITY = 4.5
 @onready
 var mesh: MeshInstance3D = $BodyMesh
 @onready
-var anim_player: AnimationPlayer = $AnimationPlayer
+var real_mesh: Node3D = $player
+@onready
+var anim_player: AnimationPlayer = $player/AnimationPlayer
 
 var stun_time = -1
 var suck_time = -1
-var time_to_stun = .25
+var suck_cd = -1
+var time_to_stun = 1
 
 func _ready() -> void:
 	Signals.upgrade_net.connect(net_upgrade_handle)
@@ -24,6 +27,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	stun_time -= delta
 	suck_time -= delta
+	suck_cd -= delta
 	if position.y < -5:
 		position = Vector3(0, 1, 0)
 	if not is_on_floor():
@@ -44,13 +48,17 @@ func _physics_process(delta: float) -> void:
 	# rotate player mesh
 	if (direction):
 		mesh.look_at(mesh.global_position + direction)
+		var adj = real_mesh.global_position
+		real_mesh.look_at(adj + -direction)
 	
 	move_and_slide()
 	
 	Globals.player_pos = self.global_position
 	
-	if (Input.is_action_just_pressed("suck")):
+	if (suck_cd < 0 && Input.is_action_just_pressed("suck")):
 		suck_time = 5.0
+		suck_cd = 30
+		$%Sucking.play(.5)
 	
 	if suck_time > 0:
 		suck()
@@ -61,10 +69,11 @@ func _physics_process(delta: float) -> void:
 func capture() -> void:
 	stun_time = time_to_stun
 	var things = capture_hitbox.get_overlapping_areas()
-	anim_player.play("capture")
+	anim_player.play("swing")
 	if things.size() > 0:
 		for thing in things:
 			thing.get_parent().catch()
+	$%Swing.play()
 
 func suck() -> void:
 	var things = suck_hitbox.get_overlapping_bodies()
