@@ -67,4 +67,6 @@ func catch() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property($Mesh, "scale", Vector3.ZERO, .4)
 	Globals.game.creature_caught(value)
-	$CaughtSound.play()
+	if Globals.blops_this_tick < 3:
+		$CaughtSound.play()
+	Globals.blops_this_tick += 1

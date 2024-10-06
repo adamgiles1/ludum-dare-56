@@ -77,17 +77,33 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Better Creature"
 
+[node name="MultiButton" type="Button" parent="Control2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Better Creature"
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="MoneyLabel" type="RichTextLabel" parent="Control"]
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 142.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="MoneyLabel" type="RichTextLabel" parent="Control/MarginContainer"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 249.0
-offset_bottom = 74.0
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 0.768627, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 12
@@ -125,7 +141,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, -60)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_2kou7")
-volume_db = -6.559
+volume_db = -8.0
 
 [node name="Fences" type="Node3D" parent="."]
 

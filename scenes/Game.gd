@@ -22,11 +22,13 @@ var net_button
 var speed_button
 var spawn_button
 var better_creatures_button
+var multi_button
 var net_price = 50
 var speed_price = 5
 var creature_tier_price = 10
+var multi_price = 5
 var spawn_price = 5
-var money_mult = 2.0
+var money_mult = 1.0
 
 var money = 0
 @onready
@@ -40,6 +42,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	Globals.blops_this_tick = 0
 	time_till_spawn -= delta
 	if time_till_spawn < 0:
 		time_till_spawn = time_between_spawn
@@ -67,7 +70,6 @@ func spawn_creature() -> void:
 		return
 	var x = randf_range(-17, 18)
 	var z = randf_range(-28, 8)
-	print("spawning creature at coords %s %s. There is now %s creatures" % [x, z, current_creatures])
 	var init: Creature = get_creature_scn()
 	init.position.x = x
 	init.position.y = 0
@@ -80,7 +82,7 @@ func creature_caught(value: int) -> void:
 
 func set_money(num: int) -> void:
 	money = num
-	money_label.text = "💲" + "[outline_size=12]%s[/outline_size]" % num
+	money_label.text = "[outline_size=12]$%s[/outline_size]" % num
 
 func init_buttons() -> void:
 	net_button = $%NetButton
@@ -102,11 +104,17 @@ func init_buttons() -> void:
 	better_creatures_button.pressed.connect(handle_better_creatures_but)
 	better_creatures_button.focus_mode = Button.FOCUS_NONE
 	better_creatures_button.visible = false
+	
+	multi_button = $%MultiButton
+	multi_button.pressed.connect(handle_multi_but)
+	multi_button.focus_mode = Button.FOCUS_NONE
+	multi_button.visible = false
 
 func handle_net_but():
 	money -= speed_price
 	net_price *= 10
-	if net_price > 300:
+	if net_price > 6000:
+		net_price = 9223372036854775807
 		net_button.visible = false
 	print("purchased net")
 	net_size += 1
@@ -116,7 +124,8 @@ func handle_net_but():
 func handle_speed_but():
 	money -= speed_price
 	speed_price *= 5
-	if speed_price > 1000:
+	if speed_price > 6000:
+		speed_price = 9223372036854775807
 		speed_button.visible = false
 	print("purchased speed")
 	char_speed *= 1.25
@@ -126,9 +135,10 @@ func handle_spawn_but():
 	print("purchased spawn")
 	money -= spawn_price
 	spawn_price *= 5
-	if spawn_price > 1000:
+	if spawn_price > 5000:
+		spawn_price = 9223372036854775807
 		spawn_button.visible = false
-	time_between_spawn *= .5
+	time_between_spawn *= .37
 	spawn_button.disabled = true
 
 func handle_better_creatures_but():
@@ -136,15 +146,27 @@ func handle_better_creatures_but():
 	money -= creature_tier_price
 	creature_tier_price *= 30
 	if creature_tier_price > 500:
+		creature_tier_price = 9223372036854775807
 		better_creatures_button.visible = false
 	creature_tier += 1
 	better_creatures_button.disabled = true
 
+func handle_multi_but():
+	print("purchased multiplier")
+	money -= multi_price
+	multi_price *= 10
+	if multi_price > 1500:
+		multi_price = 9223372036854775807
+		multi_button.visible = false
+	money_mult *= 2
+	multi_button.disabled = true
+
 func update_store():
-	net_button.text = "Net Upgrade 💲%s" % net_price
-	spawn_button.text = "More Creatures 💲%s" % spawn_price
-	speed_button.text = "🥾 Faster Movement 💲%s" % speed_price
-	better_creatures_button.text = "Better Creatures 💲%s" % creature_tier_price
+	net_button.text = "Net Upgrade $%s" % net_price
+	spawn_button.text = "More Creatures $%s" % spawn_price
+	speed_button.text = "Movement $%s" % speed_price
+	better_creatures_button.text = "Better Creatures $%s" % creature_tier_price
+	multi_button.text = "Double Money $%s" % multi_price
 	
 	if net_price <= money:
 		enable_button(net_button)
@@ -162,6 +184,10 @@ func update_store():
 		enable_button(better_creatures_button)
 	else:
 		better_creatures_button.disabled = true
+	if multi_price <= money:
+		enable_button(multi_button)
+	else:
+		multi_button.disabled = true
 
 
 func enable_button(button: Button) -> void:

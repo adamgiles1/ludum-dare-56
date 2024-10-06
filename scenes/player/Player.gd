@@ -87,6 +87,7 @@ func suck() -> void:
 func net_upgrade_handle() -> void:
 	print("upgrading net")
 	capture_hitbox.scale *= 2
+	$%net.scale *= 1.5
 
 func animation(direction: Vector3):
 	if stun_time > 0:

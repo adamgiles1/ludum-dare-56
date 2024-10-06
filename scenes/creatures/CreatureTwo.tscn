@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://da1sk8hbnf8gk"]
+[gd_scene load_steps=8 format=3 uid="uid://da1sk8hbnf8gk"]
 
 [ext_resource type="Script" path="res://scenes/creatures/Creature.gd" id="1_1n2l0"]
+[ext_resource type="AudioStream" uid="uid://ca06hsa80kfeh" path="res://assets/sounds/pop.wav" id="2_pkrjq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8hxg"]
 albedo_color = Color(0.501961, 0, 1, 1)
@@ -42,3 +43,8 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_1tbvt")
+
+[node name="CaughtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pkrjq")
+volume_db = 12.0
+pitch_scale = 1.5
