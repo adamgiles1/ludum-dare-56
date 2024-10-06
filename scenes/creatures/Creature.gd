@@ -61,7 +61,6 @@ func get_dir() -> Vector3:
 func catch() -> void:
 	if (is_caught):
 		return
-	print("Caught creature")
 	is_caught = true
 	caught_time_left = .5
 	var tween = get_tree().create_tween()

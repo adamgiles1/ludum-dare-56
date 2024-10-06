@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cf7ks7a7k1o1i"]
+[gd_scene load_steps=12 format=3 uid="uid://cf7ks7a7k1o1i"]
 
 [ext_resource type="PackedScene" uid="uid://bnc8yuow6e3v5" path="res://scenes/player/player.tscn" id="1_qses7"]
 [ext_resource type="Script" path="res://scenes/Game.gd" id="1_uq5qs"]
 [ext_resource type="Script" path="res://scenes/Camera.gd" id="3_yodg6"]
+[ext_resource type="Theme" uid="uid://60v5e64amxh7" path="res://assets/theme.tres" id="4_57eur"]
+[ext_resource type="FontFile" uid="uid://c2cj2ltga17m6" path="res://assets/Ubuntu-Light.ttf" id="4_s6og1"]
 [ext_resource type="AudioStream" uid="uid://clgewmskjbns1" path="res://assets/music/ld56.wav" id="5_2kou7"]
 [ext_resource type="PackedScene" uid="uid://dd7aot2e2igcg" path="res://scenes/scenery/grass.tscn" id="5_gi1mx"]
 [ext_resource type="PackedScene" uid="uid://bflm85td6854p" path="res://scenes/scenery/fence.tscn" id="6_1xle7"]
@@ -48,38 +50,52 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control2"]
+[node name="MarginContainer" type="MarginContainer" parent="Control2"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -448.0
-offset_bottom = 31.0
+offset_left = -514.0
+offset_bottom = 40.0
 grow_horizontal = 0
+theme_override_constants/margin_top = 5
 
-[node name="NetButton" type="Button" parent="Control2/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/MarginContainer"]
+layout_mode = 2
+
+[node name="NetButton" type="Button" parent="Control2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("4_57eur")
+theme_override_fonts/font = ExtResource("4_s6og1")
 text = "Bigger Net"
 
-[node name="SpeedButton" type="Button" parent="Control2/HBoxContainer"]
+[node name="SpeedButton" type="Button" parent="Control2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("4_57eur")
+theme_override_fonts/font = ExtResource("4_s6og1")
 text = "buy speed"
 
-[node name="SpawnButton" type="Button" parent="Control2/HBoxContainer"]
+[node name="SpawnButton" type="Button" parent="Control2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("4_57eur")
+theme_override_fonts/font = ExtResource("4_s6og1")
 text = "More Creatures"
 
-[node name="BetterCreaturesButton" type="Button" parent="Control2/HBoxContainer"]
+[node name="BetterCreaturesButton" type="Button" parent="Control2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("4_57eur")
+theme_override_fonts/font = ExtResource("4_s6og1")
 text = "Better Creature"
 
-[node name="MultiButton" type="Button" parent="Control2/HBoxContainer"]
+[node name="MultiButton" type="Button" parent="Control2/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("4_57eur")
+theme_override_fonts/font = ExtResource("4_s6og1")
 text = "Better Creature"
 
 [node name="Control" type="Control" parent="."]
@@ -107,7 +123,8 @@ layout_mode = 2
 theme_override_colors/default_color = Color(0, 0.768627, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 12
-theme_override_font_sizes/normal_font_size = 40
+theme_override_fonts/normal_font = ExtResource("4_s6og1")
+theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "💲[outline_size=12]0[/outline_size]"
 

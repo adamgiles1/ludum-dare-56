@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_end"):
 		#todo remove
-		money += 100
+		money += 1000
 
 func get_creature_scn() -> Creature:
 	if creature_tier >= 3 && randi_range(1,10) == 2:
@@ -82,7 +82,8 @@ func creature_caught(value: int) -> void:
 
 func set_money(num: int) -> void:
 	money = num
-	money_label.text = "[outline_size=12]$%s[/outline_size]" % num
+	var disp = str(money) if money < 100000 else str(money / 1000) + "K"
+	money_label.text = "[outline_size=12]$%s[/outline_size]" % disp
 
 func init_buttons() -> void:
 	net_button = $%NetButton
@@ -111,7 +112,7 @@ func init_buttons() -> void:
 	multi_button.visible = false
 
 func handle_net_but():
-	money -= speed_price
+	money -= net_price
 	net_price *= 10
 	if net_price > 6000:
 		net_price = 9223372036854775807
