@@ -3,6 +3,16 @@
 [ext_resource type="Script" path="res://scenes/money_sign.gd" id="1_gkwjf"]
 [ext_resource type="FontFile" uid="uid://c2cj2ltga17m6" path="res://assets/Ubuntu-Light.ttf" id="1_xe8m4"]
 
+[sub_resource type="Animation" id="Animation_fs2j1"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
 [sub_resource type="Animation" id="Animation_gcnb2"]
 resource_name = "move"
 length = 1.5
@@ -13,16 +23,6 @@ tracks/0/path = NodePath("Label3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.5, 1, 0.2, 1.333, 0, 1, 1, -0.2, 1.666, 0, 1.5, 1, 0.2, 2, 0)
-
-[sub_resource type="Animation" id="Animation_fs2j1"]
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m8t37"]
 _data = {

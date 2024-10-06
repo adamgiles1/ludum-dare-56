@@ -15,14 +15,18 @@ var mesh: MeshInstance3D = $BodyMesh
 var real_mesh: Node3D = $player
 @onready
 var anim_player: AnimationPlayer = $player/AnimationPlayer
+@onready
+var crown: Node3D = $%crown
 
 var stun_time = -1
 var suck_time = -1
 var suck_cd = -1
 var time_to_stun = 1
+var sucking_ready = true
 
 func _ready() -> void:
 	Signals.upgrade_net.connect(net_upgrade_handle)
+	Globals.player = self
 
 func _physics_process(delta: float) -> void:
 	stun_time -= delta
@@ -59,6 +63,11 @@ func _physics_process(delta: float) -> void:
 		suck_time = 5.0
 		suck_cd = 30
 		$%Sucking.play(.5)
+		sucking_ready = false
+	var suck_value = 100
+	if suck_cd > 0:
+		suck_value -= 100 * suck_cd / 30
+	Globals.game.suck_meter.value = suck_value
 	
 	if suck_time > 0:
 		suck()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bnc8yuow6e3v5"]
+[gd_scene load_steps=17 format=3 uid="uid://bnc8yuow6e3v5"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_oqo3d"]
 [ext_resource type="AudioStream" uid="uid://ikq4if61n5ff" path="res://assets/sounds/swing-mono.wav" id="2_5tylj"]
 [ext_resource type="AudioStream" uid="uid://c5xmlg0whss0h" path="res://assets/sounds/vacuum-mono.wav" id="2_86n58"]
 [ext_resource type="PackedScene" uid="uid://bymphikcu8msg" path="res://assets/models/player.fbx" id="4_eyttr"]
 [ext_resource type="PackedScene" uid="uid://ddksqe3s5shy7" path="res://assets/models/net.glb" id="5_oh1uc"]
+[ext_resource type="PackedScene" uid="uid://b8my51ob60h8e" path="res://assets/models/crown.fbx" id="6_yctty"]
 
 [sub_resource type="Animation" id="Animation_xafbs"]
 length = 0.001
@@ -132,7 +133,6 @@ bones/11/rotation = Quaternion(-0.0265, -0.00990143, -0.0661286, 0.99741)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/position = Vector3(-1.44147e-09, 0.0102268, 7.87099e-12)
 bones/12/rotation = Quaternion(0.0322403, -0.00123097, -0.0313483, 0.998988)
-bones/12/scale = Vector3(1, 1, 1)
 bones/14/position = Vector3(-0.00124943, 0.00596051, -0.000401826)
 bones/14/rotation = Quaternion(-0.540705, 0.449099, 0.575585, 0.417912)
 bones/14/scale = Vector3(1, 1, 1)
@@ -159,7 +159,6 @@ bones/24/rotation = Quaternion(0.548176, -9.76678e-08, 7.5157e-08, 0.836363)
 bones/24/scale = Vector3(1, 1, 1)
 bones/25/position = Vector3(-3.20924e-17, 0.0178924, -6.32167e-10)
 bones/25/rotation = Quaternion(-0.527364, 1.01285e-07, -6.28667e-08, 0.84964)
-bones/25/scale = Vector3(1, 1, 1)
 bones/26/position = Vector3(6.8695e-16, 0.00509124, -2.75763e-09)
 bones/26/rotation = Quaternion(4.49144e-08, 0.961249, -0.275683, 7.25723e-08)
 bones/26/scale = Vector3(1, 1, 1)
@@ -186,7 +185,7 @@ unique_name_in_owner = true
 stream = ExtResource("2_86n58")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="."]
-transform = Transform3D(-29.7019, 3.84018, 1.74659, -4.20598, -25.9909, -14.38, -0.327549, -14.482, 26.271, -0.355744, 0.53181, -0.366951)
+transform = Transform3D(-29.7019, 3.84018, 1.74656, -4.20597, -25.9909, -14.38, -0.327578, -14.482, 26.271, -0.355743, 0.53181, -0.366952)
 bone_name = "hand.R_end"
 bone_idx = 18
 use_external_skeleton = true
@@ -201,5 +200,17 @@ skeleton = NodePath("../..")
 [node name="net" parent="BoneAttachment3D" instance=ExtResource("5_oh1uc")]
 unique_name_in_owner = true
 transform = Transform3D(0.00951851, 0.00305886, 0.00020321, 0.000273568, -0.000187316, -0.0099945, -0.00305337, 0.00951884, -0.000261977, 0, 0, 0)
+
+[node name="BoneAttachment3D2" type="BoneAttachment3D" parent="."]
+transform = Transform3D(29.9991, 0.234954, -0.0174616, -0.234935, 29.6648, -4.4656, -0.0177073, 4.46559, 29.6658, 0.00684248, 1.41119, 0.00171476)
+bone_name = "face"
+bone_idx = 7
+use_external_skeleton = true
+external_skeleton = NodePath("../CharacterBody3D/player/metarig/Skeleton3D")
+
+[node name="crown" parent="BoneAttachment3D2" instance=ExtResource("6_yctty")]
+unique_name_in_owner = true
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0.01, 0)
+visible = false
 
 [editable path="CharacterBody3D/player"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf7ks7a7k1o1i"]
+[gd_scene load_steps=14 format=3 uid="uid://cf7ks7a7k1o1i"]
 
 [ext_resource type="PackedScene" uid="uid://bnc8yuow6e3v5" path="res://scenes/player/player.tscn" id="1_qses7"]
 [ext_resource type="Script" path="res://scenes/Game.gd" id="1_uq5qs"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://clgewmskjbns1" path="res://assets/music/ld56.wav" id="5_2kou7"]
 [ext_resource type="PackedScene" uid="uid://dd7aot2e2igcg" path="res://scenes/scenery/grass.tscn" id="5_gi1mx"]
 [ext_resource type="PackedScene" uid="uid://bflm85td6854p" path="res://scenes/scenery/fence.tscn" id="6_1xle7"]
+[ext_resource type="Texture2D" uid="uid://bdfgg3b7x46wp" path="res://assets/pictures/vacuum.png" id="6_rt0gv"]
+[ext_resource type="AudioStream" uid="uid://db0rrbg3w7qjl" path="res://assets/music/crown-theme.wav" id="10_bnjsb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cyln4"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -128,6 +130,31 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "💲[outline_size=12]0[/outline_size]"
 
+[node name="Control3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 142.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 300
+
+[node name="SuckMeter" type="TextureProgressBar" parent="Control3/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+texture_progress = ExtResource("6_rt0gv")
+
 [node name="Grass" type="Node3D" parent="."]
 
 [node name="Grass" parent="Grass" instance=ExtResource("5_gi1mx")]
@@ -158,7 +185,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, -60)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_2kou7")
-volume_db = -8.0
+volume_db = -9.0
 
 [node name="Fences" type="Node3D" parent="."]
 
@@ -305,3 +332,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16.925
 
 [node name="Fence36" parent="Fences" instance=ExtResource("6_1xle7")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20.1743, 0, 9.42574)
+
+[node name="Trumpet" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_bnjsb")
