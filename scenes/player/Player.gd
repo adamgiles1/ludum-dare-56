@@ -65,10 +65,13 @@ func _physics_process(delta: float) -> void:
 	
 	if (stun_time < 0 && Input.is_action_just_pressed("capture")):
 		capture()
+		
+	animation(direction)
 
 func capture() -> void:
 	stun_time = time_to_stun
 	var things = capture_hitbox.get_overlapping_areas()
+	anim_player.stop()
 	anim_player.play("swing")
 	if things.size() > 0:
 		for thing in things:
@@ -84,3 +87,12 @@ func suck() -> void:
 func net_upgrade_handle() -> void:
 	print("upgrading net")
 	capture_hitbox.scale *= 2
+
+func animation(direction: Vector3):
+	if stun_time > 0:
+		pass
+	elif (direction != Vector3.ZERO):
+		anim_player.play("move")
+	else:
+		anim_player.stop()
+		anim_player.play("idle")
